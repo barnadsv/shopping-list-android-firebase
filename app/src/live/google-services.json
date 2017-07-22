@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "716802638242",
+    "firebase_url": "https://shoppinglist-a0549.firebaseio.com",
+    "project_id": "shoppinglist-a0549",
+    "storage_bucket": "shoppinglist-a0549.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716802638242:android:cadc253697acae79",
+        "android_client_info": {
+          "package_name": "lab.com.br.shoppinglist.live"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716802638242-4svpmi4tpe6gaald45pqk0fodk28dq5r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lab.com.br.shoppinglist.live",
+            "certificate_hash": "d8c4594301adace8ce0ac34bb30c0d235b1791c1"
+          }
+        },
+        {
+          "client_id": "716802638242-fd5fju4lqshukpfeh9tp24nf5epq49hf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXEKqcQPpR4cJgdVzBXrh1JHAGi7S4WxQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716802638242-fd5fju4lqshukpfeh9tp24nf5epq49hf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
