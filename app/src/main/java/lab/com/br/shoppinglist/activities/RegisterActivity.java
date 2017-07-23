@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lab.com.br.shoppinglist.R;
-import lab.com.br.shoppinglist.services.AccountServices;
+import lab.com.br.shoppinglist.services.AccountService;
 
 /**
  * Created by LEONARDO on 22/07/2017.
@@ -60,11 +60,11 @@ public class RegisterActivity extends BaseActivity {
 
     @OnClick(R.id.activity_register_registerButton)
     public void setRegisterButton() {
-        bus.post(new AccountServices.RegisterUserRequest(userName.getText().toString(), userEmail.getText().toString(), mProgressDialog));
+        bus.post(new AccountService.RegisterUserRequest(userName.getText().toString(), userEmail.getText().toString(), mProgressDialog));
     }
 
     @Subscribe
-    public void RegisterUser(AccountServices.RegisterUserResponse response) {
+    public void RegisterUser(AccountService.RegisterUserResponse response) {
         if (!response.didSucceed()) {
             userEmail.setError(response.getPropertyError("email"));
             userName.setError(response.getPropertyError("userName"));

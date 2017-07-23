@@ -11,9 +11,9 @@ import lab.com.br.shoppinglist.infrastructure.ServiceResponse;
  * Created by LEONARDO on 22/07/2017.
  */
 
-public class AccountServices {
+public class AccountService {
 
-    private AccountServices() {
+    private AccountService() {
 
     }
 

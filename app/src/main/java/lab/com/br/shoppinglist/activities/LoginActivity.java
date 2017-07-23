@@ -16,11 +16,8 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
-import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.otto.Subscribe;
 
 import org.json.JSONException;
@@ -31,7 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lab.com.br.shoppinglist.R;
 import lab.com.br.shoppinglist.infrastructure.Utils;
-import lab.com.br.shoppinglist.services.AccountServices;
+import lab.com.br.shoppinglist.services.AccountService;
 
 
 /**
@@ -88,7 +85,7 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.activity_login_loginButton)
     public void setLoginButton() {
-        bus.post(new AccountServices.LogUserInRequest(userEmail.getText().toString(), userPassword.getText().toString(), mProgressDialog, sharedPreferences));
+        bus.post(new AccountService.LogUserInRequest(userEmail.getText().toString(), userPassword.getText().toString(), mProgressDialog, sharedPreferences));
     }
 
     @OnClick(R.id.activity_login_facebook_button)
@@ -105,7 +102,7 @@ public class LoginActivity extends BaseActivity {
                         try {
                             String email = object.getString("email");
                             String name = object.getString("name");
-                            bus.post(new AccountServices.LogUserInFacebookRequest(loginResult.getAccessToken(), email, name, mProgressDialog, sharedPreferences));
+                            bus.post(new AccountService.LogUserInFacebookRequest(loginResult.getAccessToken(), email, name, mProgressDialog, sharedPreferences));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -136,7 +133,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     @Subscribe
-    public void LogUserIn(AccountServices.LogUserInResponse response) {
+    public void LogUserIn(AccountService.LogUserInResponse response) {
         if (!response.didSucceed()) {
             userEmail.setError(response.getPropertyError("email"));
             userPassword.setError(response.getPropertyError("password"));

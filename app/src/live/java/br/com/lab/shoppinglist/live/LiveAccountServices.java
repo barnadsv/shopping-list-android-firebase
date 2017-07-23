@@ -1,10 +1,8 @@
 package br.com.lab.shoppinglist.live;
 
-import android.accounts.Account;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,7 +27,7 @@ import lab.com.br.shoppinglist.activities.MainActivity;
 import lab.com.br.shoppinglist.entities.User;
 import lab.com.br.shoppinglist.infrastructure.ShoppingListApplication;
 import lab.com.br.shoppinglist.infrastructure.Utils;
-import lab.com.br.shoppinglist.services.AccountServices;
+import lab.com.br.shoppinglist.services.AccountService;
 
 /**
  * Created by LEONARDO on 22/07/2017.
@@ -42,8 +40,8 @@ public class LiveAccountServices extends BaseLiveService {
     }
 
     @Subscribe
-    public void RegisterUser(final AccountServices.RegisterUserRequest request) {
-        AccountServices.RegisterUserResponse response = new AccountServices.RegisterUserResponse();
+    public void RegisterUser(final AccountService.RegisterUserRequest request) {
+        AccountService.RegisterUserResponse response = new AccountService.RegisterUserResponse();
         if (request.userEmail.isEmpty()) {
             response.setPropertyErrors("email", "Please put in your email.");
         }
@@ -101,8 +99,8 @@ public class LiveAccountServices extends BaseLiveService {
     }
 
     @Subscribe
-    public void LogInUser(final AccountServices.LogUserInRequest request) {
-        AccountServices.LogUserInResponse response = new AccountServices.LogUserInResponse();
+    public void LogInUser(final AccountService.LogUserInRequest request) {
+        AccountService.LogUserInResponse response = new AccountService.LogUserInResponse();
 
         if (request.userEmail.isEmpty()) {
             response.setPropertyErrors("email", "Please enter your email");
@@ -156,7 +154,7 @@ public class LiveAccountServices extends BaseLiveService {
     }
 
     @Subscribe
-    public void FacebookLogIn(final AccountServices.LogUserInFacebookRequest request) {
+    public void FacebookLogIn(final AccountService.LogUserInFacebookRequest request) {
         request.progressDialog.show();
         AuthCredential authCredential = FacebookAuthProvider.getCredential(request.accessToken.getToken());
         auth.signInWithCredential(authCredential)
