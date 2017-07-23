@@ -1,7 +1,9 @@
 package lab.com.br.shoppinglist.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.internal.SignInHubActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.otto.Subscribe;
 
@@ -27,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import lab.com.br.shoppinglist.R;
+import lab.com.br.shoppinglist.infrastructure.Utils;
 import lab.com.br.shoppinglist.services.AccountServices;
 
 
@@ -54,9 +58,11 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.activity_login_facebook_button)
     LoginButton facebookButton;
 
-    ProgressDialog mProgressDialog;
+    private ProgressDialog mProgressDialog;
 
-    CallbackManager mCallbackManager;
+    private CallbackManager mCallbackManager;
+
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,52 +70,14 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         linearLayout.setBackgroundResource(R.drawable.background_screen_two);
-        FirebaseAuth.getInstance().signOut();
-
-//        callbackManager = CallbackManager.Factory.create();
-//        facebookButton = (LoginButton) findViewById(R.id.activity_login_facebook_button);
-//        facebookButton.setReadPermissions("email");
-//
-//        LoginManager.getInstance().registerCallback(callbackManager,
-//                new FacebookCallback<LoginResult>() {
-//                    @Override
-//                    public void onSuccess(LoginResult loginResult) {
-//                        // App code
-//                    }
-//
-//                    @Override
-//                    public void onCancel() {
-//                        // App code
-//                    }
-//
-//                    @Override
-//                    public void onError(FacebookException exception) {
-//                        // App code
-//                    }
-//                });
-//
-//        // Callback registration
-//        facebookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//                // App code
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//                // App code
-//            }
-//
-//            @Override
-//            public void onError(FacebookException exception) {
-//                // App code
-//            }
-//        });
+//        FirebaseAuth.getInstance().signOut();
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setMessage("Attempting LogIn");
         mProgressDialog.setCancelable(false);
+
+        sharedPreferences = getSharedPreferences(Utils.MY_PREFERENCE, Context.MODE_PRIVATE);
     }
 
     @OnClick(R.id.activity_login_registerButton)
@@ -120,7 +88,7 @@ public class LoginActivity extends BaseActivity {
 
     @OnClick(R.id.activity_login_loginButton)
     public void setLoginButton() {
-        bus.post(new AccountServices.LogUserInRequest(userEmail.getText().toString(), userPassword.getText().toString(), mProgressDialog));
+        bus.post(new AccountServices.LogUserInRequest(userEmail.getText().toString(), userPassword.getText().toString(), mProgressDialog, sharedPreferences));
     }
 
     @OnClick(R.id.activity_login_facebook_button)
@@ -137,7 +105,7 @@ public class LoginActivity extends BaseActivity {
                         try {
                             String email = object.getString("email");
                             String name = object.getString("name");
-                            bus.post(new AccountServices.LogUserInFacebookRequest(loginResult.getAccessToken(), email, name, mProgressDialog));
+                            bus.post(new AccountServices.LogUserInFacebookRequest(loginResult.getAccessToken(), email, name, mProgressDialog, sharedPreferences));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

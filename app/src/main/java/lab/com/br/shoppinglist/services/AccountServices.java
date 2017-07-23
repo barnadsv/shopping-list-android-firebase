@@ -1,6 +1,7 @@
 package lab.com.br.shoppinglist.services;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 
 import com.facebook.AccessToken;
 
@@ -36,11 +37,13 @@ public class AccountServices {
         public String userEmail;
         public String userPassword;
         public ProgressDialog progressDialog;
+        public SharedPreferences sharedPreferences;
 
-        public LogUserInRequest(String userEmail, String userPassword, ProgressDialog progressDialog) {
+        public LogUserInRequest(String userEmail, String userPassword, ProgressDialog progressDialog, SharedPreferences sharedPreferences) {
             this.userEmail = userEmail;
             this.userPassword = userPassword;
             this.progressDialog = progressDialog;
+            this.sharedPreferences = sharedPreferences;
         }
     }
 
@@ -53,12 +56,14 @@ public class AccountServices {
         public String userEmail;
         public String userName;
         public ProgressDialog progressDialog;
+        public SharedPreferences sharedPreferences;
 
-        public LogUserInFacebookRequest(AccessToken accessToken, String userEmail, String userName, ProgressDialog progressDialog) {
+        public LogUserInFacebookRequest(AccessToken accessToken, String userEmail, String userName, ProgressDialog progressDialog, SharedPreferences sharedPreferences) {
             this.accessToken = accessToken;
             this.userEmail = userEmail;
             this.userName = userName;
             this.progressDialog = progressDialog;
+            this.sharedPreferences = sharedPreferences;
         }
     }
 
