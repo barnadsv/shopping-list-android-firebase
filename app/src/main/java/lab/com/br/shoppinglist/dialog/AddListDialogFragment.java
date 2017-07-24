@@ -37,7 +37,6 @@ public class AddListDialogFragment extends BaseDialog implements View.OnClickLis
                 .setView(rootView)
                 .setPositiveButton("Create", null)
                 .setNegativeButton("Cancel", null)
-                .setTitle("Create a List")
                 .show();
 
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(this);

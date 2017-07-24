@@ -9,7 +9,7 @@ import lab.com.br.shoppinglist.infrastructure.ShoppingListApplication;
 public class Module {
 
     public static void Register(ShoppingListApplication application) {
-        new LiveAccountServices(application);
-        new LiveShoppingListServices(application);
+        new LiveAccountService(application);
+        new LiveShoppingListService(application);
     }
 }

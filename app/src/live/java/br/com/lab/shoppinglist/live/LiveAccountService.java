@@ -33,9 +33,9 @@ import lab.com.br.shoppinglist.services.AccountService;
  * Created by LEONARDO on 22/07/2017.
  */
 
-public class LiveAccountServices extends BaseLiveService {
+public class LiveAccountService extends BaseLiveService {
 
-    public LiveAccountServices(ShoppingListApplication application) {
+    public LiveAccountService(ShoppingListApplication application) {
         super(application);
     }
 

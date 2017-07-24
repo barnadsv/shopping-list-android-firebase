@@ -2,4 +2,14 @@
     <string name="app_name">ShoppingList</string>
     <string name="facebook_app_id">124705248140385</string>
     <string name="fb_login_protocol_scheme">fb124705248140385</string>
+
+    <string name="pref_sort_list_name">pref_sort_list_name</string>
+    <string name="pref_sort_list_dialog_title">Order By</string>
+    <string name="pref_entry_publishTime">Publish Time</string>
+    <string name="pref_entry_listName">List Name</string>
+    <string name="pref_entry_ownerEmail">Owner</string>
+    <string name="pref_entry_publishTime_value">orderByPushKey</string>
+    <string name="pref_entry_listName_value">listName</string>
+    <string name="pref_entry_ownerEmail_value">ownerEmail</string>
+
 </resources>
